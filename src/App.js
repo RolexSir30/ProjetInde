@@ -52,9 +52,9 @@ const App = () => {
   const handleFetchProofRecord = async () => {
     try {
       const response = await fetchProofRecord(recordId);
-      //console.log("from App" + response.data) // Utilisation de fetchProofRecord au lieu de getProofRecord
-      //setProofRecord(response.data); // Mise à jour de l'état proofRecord avec les données de réponse
-      console.log('Proof record fetched:', response.data);
+      //console.log("from App" + response) // Utilisation de fetchProofRecord au lieu de getProofRecord
+      setProofRecord(response); // Mise à jour de l'état proofRecord avec les données de réponse
+      console.log('Proof record fetched: from App', response);
     } catch (error) {
       setError(error.message || 'Error fetching proof record');
       console.error('Error fetching proof record:', error);
@@ -92,11 +92,13 @@ const App = () => {
             />
           </label>
           <button onClick={handleFetchProofRecord}>Fetch Proof Record</button>
-          {proofRecord && (
-            <div>
-              <h3>Proof Record Details:</h3>
-            </div>
-          )}
+{proofRecord && (
+  <div>
+    <h3>Proof Record Details:</h3>
+    <pre>{JSON.stringify(proofRecord, null, 2)}</pre>
+  </div>
+)}
+
         </div>
         <button onClick={handleSendProofRequest}>Send Proof Request</button>
         <h1>Envoi du Credential from Issuer</h1><br></br>

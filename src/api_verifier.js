@@ -131,7 +131,7 @@ export const fetchProofRecord = async (recordId) => {
       // Exemple: accéder à une propriété spécifique de l'objet JSON
       const proofRecord = {
 
-        status: response.data.state,
+        state : response.data.by_format.pres.indy.requested_proof.revealed_attrs,
 
         // Ajoutez d'autres propriétés nécessaires ici
       };
