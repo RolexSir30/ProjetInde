@@ -52,8 +52,8 @@ const App = () => {
   const handleFetchProofRecord = async () => {
     try {
       const response = await fetchProofRecord(recordId);
-      console.log(response.data) // Utilisation de fetchProofRecord au lieu de getProofRecord
-      setProofRecord(response.data); // Mise à jour de l'état proofRecord avec les données de réponse
+      //console.log("from App" + response.data) // Utilisation de fetchProofRecord au lieu de getProofRecord
+      //setProofRecord(response.data); // Mise à jour de l'état proofRecord avec les données de réponse
       console.log('Proof record fetched:', response.data);
     } catch (error) {
       setError(error.message || 'Error fetching proof record');

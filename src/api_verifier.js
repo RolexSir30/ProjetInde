@@ -125,15 +125,17 @@ export const fetchProofRecord = async (recordId) => {
   try {
     const response = await api.get(`/present-proof-2.0/records/${recordId}`);
     console.log('Response from API:', response.data); // Vérifiez le contenu et le type de response.data
-
+    
     // Assurez-vous que response.data est un objet
     if (typeof response.data === 'object') {
       // Exemple: accéder à une propriété spécifique de l'objet JSON
       const proofRecord = {
-        id: response.data.id,
-        status: response.data.status,
+
+        status: response.data.state,
+
         // Ajoutez d'autres propriétés nécessaires ici
       };
+      console.log(proofRecord);
       return proofRecord;
     } else {
       throw new Error('Response data is not an object');
