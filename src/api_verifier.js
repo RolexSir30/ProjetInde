@@ -107,16 +107,7 @@ export const sendProofRequest = async (connectionId) => {
           }
         },
         requested_predicates: {
-          date_of_expiry: {
-            name: "date_of_expiry",
-            p_type: ">=",
-            "p_value": 20340715,
-            restrictions: [
-              {
-                cred_def_id: "HUQUGuQDrk6NsQDDsELbYs:3:CL:35:default"
-              }
-            ]
-          }
+          
         }
       }
     },
@@ -183,4 +174,3 @@ export const credentialDetail = async (recordId) => {
     throw error;
   }
 };
-
