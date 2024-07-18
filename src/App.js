@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createOutOfBandInvitation } from './api';
-import { createOutOfBandInvitation as createVerifierInvitation, sendProofRequest, fetchProofRecord } from './api_verifier'; // Importez fetchProofRecord
+import { createOutOfBandInvitation as createVerifierInvitation, sendProofRequest, fetchProofRecord, credentialDetail } from './api_verifier';
 import CredentialForm from './components/CredentialForm';
 
 const App = () => {
@@ -10,9 +10,14 @@ const App = () => {
   const [presExId, setPresExId] = useState(null);
   const [proofRecord, setProofRecord] = useState(null);
   const [recordId, setRecordId] = useState('');
+  const [credentialRecordId, setCredentialRecordId] = useState('');
 
   const handleChangeRecordId = (event) => {
     setRecordId(event.target.value);
+  };
+
+  const handleChangeCredentialRecordId = (event) => {
+    setCredentialRecordId(event.target.value);
   };
 
   const handleCreateIssuerInvitation = async () => {
@@ -41,7 +46,7 @@ const App = () => {
     try {
       const connectionId = '6f4841bc-02eb-4144-819c-3b2ce2fae686';
       const response = await sendProofRequest(connectionId);
-      setPresExId(response.pres_ex_id); // Mise à jour pour récupérer pres_ex_id depuis la réponse
+      setPresExId(response.pres_ex_id);
       console.log('Proof request sent:', response);
     } catch (error) {
       setError(error.message || 'Error sending proof request');
@@ -52,12 +57,22 @@ const App = () => {
   const handleFetchProofRecord = async () => {
     try {
       const response = await fetchProofRecord(recordId);
-      //console.log("from App" + response) // Utilisation de fetchProofRecord au lieu de getProofRecord
-      setProofRecord(response); // Mise à jour de l'état proofRecord avec les données de réponse
-      console.log('Proof record fetched: from App', response);
+      setProofRecord(response);
+      console.log('Proof record fetched:', response);
     } catch (error) {
       setError(error.message || 'Error fetching proof record');
       console.error('Error fetching proof record:', error);
+    }
+  };
+
+  const handleFetchCredentialDetail = async () => {
+    try {
+      const response = await credentialDetail(credentialRecordId);
+      setProofRecord(response);
+      console.log('Credential detail fetched:', response);
+    } catch (error) {
+      setError(error.message || 'Error fetching credential detail');
+      console.error('Error fetching credential detail:', error);
     }
   };
 
@@ -92,15 +107,26 @@ const App = () => {
             />
           </label>
           <button onClick={handleFetchProofRecord}>Fetch Proof Record</button>
-{proofRecord && (
-  <div>
-    <h3>Proof Record Details:</h3>
-    <pre>{JSON.stringify(proofRecord, null, 2)}</pre>
-  </div>
-)}
-
+          {proofRecord && (
+            <div>
+              <h3>Proof Record Details:</h3>
+              <pre>{JSON.stringify(proofRecord, null, 2)}</pre>
+            </div>
+          )}
         </div>
         <button onClick={handleSendProofRequest}>Send Proof Request</button>
+        <div>
+          <h2>Fetch  the attributes of Proof Record Detail</h2>
+          <label>
+            Enter Credential Record ID:
+            <input
+              type="text"
+              value={credentialRecordId}
+              onChange={handleChangeCredentialRecordId}
+            />
+          </label>
+          <button onClick={handleFetchCredentialDetail}>Fetch Credential Detail</button>
+        </div>
         <h1>Envoi du Credential from Issuer</h1><br></br>
         <CredentialForm />
       </header>

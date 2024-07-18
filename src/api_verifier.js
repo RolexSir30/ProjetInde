@@ -32,6 +32,8 @@ export const createOutOfBandInvitation = async () => {
 };
 
 export const sendProofRequest = async (connectionId) => {
+  const currentDate = new Date().toISOString().split('T')[0]; // Obtenez la date actuelle au format YYYY-MM-DD
+
   const data = {
     connection_id: connectionId,
     presentation_request: {
@@ -104,7 +106,18 @@ export const sendProofRequest = async (connectionId) => {
             ]
           }
         },
-        requested_predicates: {}
+        requested_predicates: {
+          date_of_expiry: {
+            name: "date_of_expiry",
+            p_type: ">=",
+            "p_value": 20340715,
+            restrictions: [
+              {
+                cred_def_id: "HUQUGuQDrk6NsQDDsELbYs:3:CL:35:default"
+              }
+            ]
+          }
+        }
       }
     },
     comment: "new_proof",
@@ -131,7 +144,7 @@ export const fetchProofRecord = async (recordId) => {
       // Exemple: accéder à une propriété spécifique de l'objet JSON
       const proofRecord = {
 
-        state : response.data.by_format.pres.indy.requested_proof.revealed_attrs,
+        data : response.data.verified,
 
         // Ajoutez d'autres propriétés nécessaires ici
       };
@@ -146,4 +159,28 @@ export const fetchProofRecord = async (recordId) => {
   }
 };
 
+export const credentialDetail = async (recordId) => {
+  try {
+    const response = await api.get(`/present-proof-2.0/records/${recordId}`);
+    console.log('Response from API:', response.data); // Vérifiez le contenu et le type de response.data
+    
+    // Assurez-vous que response.data est un objet
+    if (typeof response.data === 'object') {
+      // Exemple: accéder à une propriété spécifique de l'objet JSON
+      const proofRecord = {
+
+        data : response.data.by_format.pres.indy.requested_proof.revealed_attrs,
+
+        // Ajoutez d'autres propriétés nécessaires ici
+      };
+      console.log(proofRecord);
+      return proofRecord;
+    } else {
+      throw new Error('Response data is not an object');
+    }
+  } catch (error) {
+    console.error(`Error fetching proof record ${recordId}:`, error);
+    throw error;
+  }
+};
 
