@@ -89,14 +89,7 @@ export const sendProofRequest = async (connectionId) => {
               }
             ]
           },
-          date_of_expiry_dateint: {
-            name: "date_of_expiry_dateint",
-            restrictions: [
-              {
-                cred_def_id: "HUQUGuQDrk6NsQDDsELbYs:3:CL:37:default"
-              }
-            ]
-          },
+          
           issuer: {
             name: "issuer",
             restrictions: [
@@ -115,7 +108,12 @@ export const sendProofRequest = async (connectionId) => {
           }
         },
         requested_predicates: {
-          
+          "additionalProp2": {
+            "name": "date_of_expiry_dateint",
+            "p_type": ">=",
+            "p_value" :parseInt("20340717", 10), ////le probleme est résolu maintenant faut que je 
+            "restrictions": [{}]
+        }
         }
       }
     },

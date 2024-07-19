@@ -48,7 +48,7 @@ export const sendCredential = async (formData) => {
         { "name": "date_of_birth", "value": formData.date_of_birth },
         { "name": "nationality", "value": formData.nationality },
         { "name": "date_of_issue_dateint", "value": currentDate },
-        { "name": "date_of_expiry_dateint", "value": expiryDate.toISOString().split('T')[0] },
+        { "name": "date_of_expiry_dateint", "value":formatDateToYYYYMMDD(expiryDate) },
         { "name": "issuer", "value": formData.issuer },
         { "name": "photo_url", "value": formData.photo_url }
       ]
@@ -69,3 +69,15 @@ export const sendCredential = async (formData) => {
     throw error;
   }
 };
+
+
+
+
+
+function formatDateToYYYYMMDD(date) {
+  const year = date.getFullYear();
+  const month = ('0' + (date.getMonth() + 1)).slice(-2);
+  const day = ('0' + date.getDate()).slice(-2);
+  const dateString = `${year}${month}${day}`;
+  return dateString;
+}

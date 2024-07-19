@@ -47,8 +47,8 @@ export const sendCredential = async (formData) => {
         { "name": "firstname", "value": formData.firstname },
         { "name": "date_of_birth", "value": formData.date_of_birth },
         { "name": "nationality", "value": formData.nationality },
-        { "name": "date_of_issue", "value": currentDate },
-        { "name": "date_of_expiry", "value": expiryDate.toISOString().split('T')[0] },
+        { "name": "date_of_issue_dateint", "value": currentDate },
+        { "name": "date_of_expiry_dateint", "value": expiryDate.toISOString().split('T')[0] },
         { "name": "issuer", "value": formData.issuer },
         { "name": "photo_url", "value": formData.photo_url }
       ]

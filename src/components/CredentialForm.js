@@ -74,7 +74,7 @@ const CredentialForm = () => {
       </label>
       <label>
         Date of Expiry:
-        <input type="dateint" name="date_of_expiry_dateint" value={formData.date_of_expiry} onChange={handleChange} />
+        <input type="int" name="date_of_expiry_dateint" value={formData.date_of_expiry} onChange={handleChange} />
       </label>
       <label>
         
