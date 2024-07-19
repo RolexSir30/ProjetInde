@@ -10,7 +10,7 @@ const CredentialForm = () => {
     date_of_birth: '',
     nationality: '',
     date_of_issue: new Date().toISOString().split('T')[0], // Date actuelle
-    date_of_expiry: new Date(new Date().setFullYear(new Date().getFullYear() + 10)).toISOString().split('T')[0], // 10 ans après la date actuelle
+    date_of_expiry_dateint: new Date(new Date().setFullYear(new Date().getFullYear() + 10)).toISOString().split('T')[0], // 10 ans après la date actuelle
     issuer: '',
     photo_url: '',
     connection_id: 'bf9850a2-6dcc-4c1d-9862-bd1f4e69c144' // Par défaut
@@ -57,6 +57,10 @@ const CredentialForm = () => {
         <input type="text" name="name" value={formData.name} onChange={handleChange} />
       </label>
       <label>
+        First Name:
+        <input type="text" name="firstname" value={formData.firstname} onChange={handleChange} />
+      </label>
+      <label>
         Date of Birth:
         <input type="date" name="date_of_birth" value={formData.date_of_birth} onChange={handleChange} />
       </label>
@@ -66,13 +70,14 @@ const CredentialForm = () => {
       </label>
       <label>
         Date of Issue:
-        <input type="date" name="date_of_issue" value={formData.date_of_issue} onChange={handleChange} />
+        <input type="dateint" name="date_of_issue" value={formData.date_of_issue} onChange={handleChange} />
       </label>
       <label>
         Date of Expiry:
-        <input type="date" name="date_of_expiry" value={formData.date_of_expiry} onChange={handleChange} />
+        <input type="dateint" name="date_of_expiry_dateint" value={formData.date_of_expiry} onChange={handleChange} />
       </label>
       <label>
+        
         Issuer:
         <input type="text" name="issuer" value={formData.issuer} onChange={handleChange} />
       </label>

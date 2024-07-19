@@ -43,7 +43,7 @@ export const sendProofRequest = async (connectionId) => {
             name: "passport_number",
             restrictions: [
               {
-                cred_def_id: "HUQUGuQDrk6NsQDDsELbYs:3:CL:35:default"
+                cred_def_id: "HUQUGuQDrk6NsQDDsELbYs:3:CL:37:default"
               }
             ]
           },
@@ -51,7 +51,15 @@ export const sendProofRequest = async (connectionId) => {
             name: "name",
             restrictions: [
               {
-                cred_def_id: "HUQUGuQDrk6NsQDDsELbYs:3:CL:35:default"
+                cred_def_id: "HUQUGuQDrk6NsQDDsELbYs:3:CL:37:default"
+              }
+            ]
+          },
+          firstname: {
+            name: "firstname",
+            restrictions: [
+              {
+                cred_def_id: "HUQUGuQDrk6NsQDDsELbYs:3:CL:37:default"
               }
             ]
           },
@@ -59,7 +67,7 @@ export const sendProofRequest = async (connectionId) => {
             name: "date_of_birth",
             restrictions: [
               {
-                cred_def_id: "HUQUGuQDrk6NsQDDsELbYs:3:CL:35:default"
+                cred_def_id: "HUQUGuQDrk6NsQDDsELbYs:3:CL:37:default"
               }
             ]
           },
@@ -67,31 +75,31 @@ export const sendProofRequest = async (connectionId) => {
             name: "nationality",
             restrictions: [
               {
-                cred_def_id: "HUQUGuQDrk6NsQDDsELbYs:3:CL:35:default"
+                cred_def_id: "HUQUGuQDrk6NsQDDsELbYs:3:CL:37:default"
               }
             ]
           },
-          date_of_issue: {
-            name: "date_of_issue",
+          date_of_issue_dateint: {
+            name: "date_of_issue_dateint",
             restrictions: [
               {
-                cred_def_id: "HUQUGuQDrk6NsQDDsELbYs:3:CL:35:default"
+                cred_def_id: "HUQUGuQDrk6NsQDDsELbYs:3:CL:37:default"
               }
             ]
           },
-          date_of_expiry: {
-            name: "date_of_expiry",
+          date_of_expiry_dateint: {
+            name: "date_of_expiry_dateint",
             restrictions: [
               {
-                cred_def_id: "HUQUGuQDrk6NsQDDsELbYs:3:CL:35:default"
+                cred_def_id: "HUQUGuQDrk6NsQDDsELbYs:3:CL:37:default"
               }
             ]
-          },
+          }, 
           issuer: {
             name: "issuer",
             restrictions: [
               {
-                cred_def_id: "HUQUGuQDrk6NsQDDsELbYs:3:CL:35:default"
+                cred_def_id: "HUQUGuQDrk6NsQDDsELbYs:3:CL:37:default"
               }
             ]
           },
@@ -99,7 +107,7 @@ export const sendProofRequest = async (connectionId) => {
             name: "photo_url",
             restrictions: [
               {
-                cred_def_id: "HUQUGuQDrk6NsQDDsELbYs:3:CL:35:default"
+                cred_def_id: "HUQUGuQDrk6NsQDDsELbYs:3:CL:37:default"
               }
             ]
           }

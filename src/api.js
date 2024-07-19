@@ -44,10 +44,11 @@ export const sendCredential = async (formData) => {
       "attributes": [
         { "name": "passport_number", "value": formData.passport_number },
         { "name": "name", "value": formData.name },
+        { "name": "firstname", "value": formData.firstname },
         { "name": "date_of_birth", "value": formData.date_of_birth },
         { "name": "nationality", "value": formData.nationality },
-        { "name": "date_of_issue", "value": currentDate },
-        { "name": "date_of_expiry", "value": expiryDate.toISOString().split('T')[0] },
+        { "name": "date_of_issue_dateint", "value": currentDate },
+        { "name": "date_of_expiry_dateint", "value": expiryDate.toISOString().split('T')[0] },
         { "name": "issuer", "value": formData.issuer },
         { "name": "photo_url", "value": formData.photo_url }
       ]
@@ -55,7 +56,7 @@ export const sendCredential = async (formData) => {
     connection_id: formData.connection_id || "bf9850a2-6dcc-4c1d-9862-bd1f4e69c144",
     filter: {
       indy: {
-        cred_def_id: "HUQUGuQDrk6NsQDDsELbYs:3:CL:35:default"
+        cred_def_id: "HUQUGuQDrk6NsQDDsELbYs:3:CL:37:default"
       }
     }
   };
