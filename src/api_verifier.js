@@ -10,6 +10,18 @@ const api = axios.create({
   },
 });
 
+// Obtenir la date actuelle
+const currentDate = new Date();
+const year = currentDate.getFullYear();
+const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Mois de 0-11 à 1-12
+const day = String(currentDate.getDate()).padStart(2, '0');
+
+// Formater la date au format YYYYMMDD
+const dateString = `${year}${month}${day}`;
+
+// Convertir la chaîne en entier
+const p_value = parseInt(dateString, 10);
+
 export const createOutOfBandInvitation = async () => {
   try {
     const invitationData = {
@@ -33,7 +45,7 @@ export const createOutOfBandInvitation = async () => {
 
 export const sendProofRequest = async (connectionId) => {
   const currentDate = new Date().toISOString().split('T')[0]; // Obtenez la date actuelle au format YYYY-MM-DD
-
+ console.log("voici la p_value : " +p_value);
   const data = {
     connection_id: connectionId,
     presentation_request: {
@@ -111,7 +123,7 @@ export const sendProofRequest = async (connectionId) => {
           "additionalProp2": {
             "name": "date_of_expiry_dateint",
             "p_type": ">=",
-            "p_value" :parseInt("20340717", 10), ////le probleme est résolu maintenant faut que je 
+            "p_value" :p_value, ////le probleme est résolu maintenant faut que je 
             "restrictions": [{}]
         }
         }
