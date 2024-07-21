@@ -1,13 +1,37 @@
+// VerifierPage.js
+
 import React, { useState } from 'react';
 import {
   Container, Typography, Button, TextField, Box, Grid, Paper
 } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import {
   createOutOfBandInvitation as createVerifierInvitation,
   sendProofRequest,
   fetchProofRecord,
   credentialDetail
 } from './api_verifier';
+
+// Style for the TextField with a white border and label color
+const StyledTextField = styled(TextField)(({ theme }) => ({
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: 'white', // Set border color to white
+    },
+    '&:hover fieldset': {
+      borderColor: 'lightgray', // Change border color on hover
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: 'white', // Set border color when focused
+    },
+  },
+  '& .MuiInputLabel-root': {
+    color: 'white', // Set label color to white
+  },
+  '& .MuiInputLabel-root.Mui-focused': {
+    color: 'white', // Set label color to white when focused
+  },
+}));
 
 const VerifierPage = () => {
   const [verifierInvitation, setVerifierInvitation] = useState(null);
@@ -100,10 +124,15 @@ const VerifierPage = () => {
                   padding: '16px',
                   maxHeight: '300px',
                   overflow: 'auto',
+                  backgroundColor: 'white',
                 }}
               >
-                <Typography variant="h6">Verifier Invitation Created:</Typography>
-                <pre>{JSON.stringify(verifierInvitation, null, 2)}</pre>
+                <Typography variant="h6" style={{ color: 'black' }}>
+                  Verifier Invitation Created:
+                </Typography>
+                <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>
+                  {JSON.stringify(verifierInvitation, null, 2)}
+                </pre>
               </Paper>
             </Grid>
           )}
@@ -122,9 +151,10 @@ const VerifierPage = () => {
             </Grid>
           )}
           <Grid item xs={12}>
-            <Typography variant="h6">Fetch Proof Record</Typography>
-            <TextField
-              fullWidth
+            <Typography variant="h6" style={{ color: 'white' }}>
+              Fetch Proof Record
+            </Typography>
+            <StyledTextField
               label="Enter Proof Record ID"
               value={recordId}
               onChange={handleChangeRecordId}
@@ -148,17 +178,23 @@ const VerifierPage = () => {
                   padding: '16px',
                   maxHeight: '300px',
                   overflow: 'auto',
+                  backgroundColor: 'white',
                 }}
               >
-                <Typography variant="h6">Proof Record Details:</Typography>
-                <pre>{JSON.stringify(proofRecord, null, 2)}</pre>
+                <Typography variant="h6" style={{ color: 'black' }}>
+                  Proof Record Details:
+                </Typography>
+                <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>
+                  {JSON.stringify(proofRecord, null, 2)}
+                </pre>
               </Paper>
             </Grid>
           )}
           <Grid item xs={12}>
-            <Typography variant="h6">Send Proof Request</Typography>
-            <TextField
-              fullWidth
+            <Typography variant="h6" style={{ color: 'white' }}>
+              Send Proof Request
+            </Typography>
+            <StyledTextField
               label="Enter Connection ID"
               value={connectionId}
               onChange={handleChangeConnectionId}
@@ -175,9 +211,10 @@ const VerifierPage = () => {
             </Button>
           </Grid>
           <Grid item xs={12}>
-            <Typography variant="h6">Fetch the attributes of Proof Record Detail</Typography>
-            <TextField
-              fullWidth
+            <Typography variant="h6" style={{ color: 'white' }}>
+              Fetch the attributes of Proof Record Detail
+            </Typography>
+            <StyledTextField
               label="Enter Credential Record ID"
               value={credentialRecordId}
               onChange={handleChangeCredentialRecordId}
@@ -201,10 +238,15 @@ const VerifierPage = () => {
                   padding: '16px',
                   maxHeight: '300px',
                   overflow: 'auto',
+                  backgroundColor: 'white',
                 }}
               >
-                <Typography variant="h6">Credential Detail:</Typography>
-                <pre>{JSON.stringify(credentialDetailRecord, null, 2)}</pre>
+                <Typography variant="h6" style={{ color: 'black' }}>
+                  Credential Detail:
+                </Typography>
+                <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>
+                  {JSON.stringify(credentialDetailRecord, null, 2)}
+                </pre>
               </Paper>
             </Grid>
           )}
