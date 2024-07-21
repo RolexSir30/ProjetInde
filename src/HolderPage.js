@@ -1,23 +1,60 @@
 // HolderPage.js
 
 import React, { useState } from 'react';
-import { getCredentials } from './api_holder';
+import { getCredentials, receiveInvitation } from './api_holder';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
+import TextField from '@mui/material/TextField';
+import { styled } from '@mui/material/styles';
+
+// Style for the TextField with a white border and label color
+const StyledTextField = styled(TextField)(({ theme }) => ({
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: 'white', // Set border color to white
+    },
+    '&:hover fieldset': {
+      borderColor: 'lightgray', // Change border color on hover
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: 'white', // Set border color when focused
+    },
+  },
+  '& .MuiInputLabel-root': {
+    color: 'white', // Set label color to white
+  },
+  '& .MuiInputLabel-root.Mui-focused': {
+    color: 'white', // Set label color to white when focused
+  },
+}));
 
 const HolderPage = () => {
   const [credentials, setCredentials] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [invitation, setInvitation] = useState('');
 
   const handleClick = async () => {
     setLoading(true);
     const data = await getCredentials();
     setCredentials(data);
     setLoading(false);
+  };
+
+  const handleReceiveInvitation = async () => {
+    try {
+      const invitationJson = JSON.parse(invitation);
+      setLoading(true);
+      const response = await receiveInvitation(invitationJson);
+      console.log(response);
+      setLoading(false);
+    } catch (error) {
+      console.error('Invalid JSON format:', error);
+      setLoading(false);
+    }
   };
 
   return (
@@ -46,6 +83,7 @@ const HolderPage = () => {
                   padding: '16px',
                   maxHeight: '300px',
                   overflow: 'auto',
+                  backgroundColor: 'white',
                 }}
               >
                 <Typography variant="h6" gutterBottom>
@@ -57,6 +95,29 @@ const HolderPage = () => {
               </Paper>
             </Grid>
           )}
+          <Grid item xs={12}>
+            <StyledTextField
+              label="Invitation JSON"
+              variant="outlined"
+              fullWidth
+              multiline
+              rows={10}
+              value={invitation}
+              onChange={(e) => setInvitation(e.target.value)}
+              disabled={loading}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Button
+              variant="contained"
+              color="secondary"
+              fullWidth
+              onClick={handleReceiveInvitation}
+              disabled={loading}
+            >
+              {loading ? 'Processing...' : 'Receive Invitation'}
+            </Button>
+          </Grid>
         </Grid>
       </Box>
     </Container>
