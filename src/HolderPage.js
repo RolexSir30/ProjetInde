@@ -1,4 +1,4 @@
-// HolderPage.js
+// src/pages/HolderPage.js
 
 import React, { useState } from 'react';
 import { getCredentials, receiveInvitation } from './api_holder';
@@ -36,10 +36,11 @@ const HolderPage = () => {
   const [credentials, setCredentials] = useState(null);
   const [loading, setLoading] = useState(false);
   const [invitation, setInvitation] = useState('');
+  const [apiUrl, setApiUrl] = useState('http://0.0.0.0:11002');
 
-  const handleClick = async () => {
+  const handleGetCredentials = async () => {
     setLoading(true);
-    const data = await getCredentials();
+    const data = await getCredentials(apiUrl);
     setCredentials(data);
     setLoading(false);
   };
@@ -48,7 +49,7 @@ const HolderPage = () => {
     try {
       const invitationJson = JSON.parse(invitation);
       setLoading(true);
-      const response = await receiveInvitation(invitationJson);
+      const response = await receiveInvitation(apiUrl, invitationJson);
       console.log(response);
       setLoading(false);
     } catch (error) {
@@ -65,11 +66,21 @@ const HolderPage = () => {
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12}>
+            <StyledTextField
+              label="API URL"
+              variant="outlined"
+              fullWidth
+              value={apiUrl}
+              onChange={(e) => setApiUrl(e.target.value)}
+              disabled={loading}
+            />
+          </Grid>
+          <Grid item xs={12}>
             <Button
               variant="contained"
               color="primary"
               fullWidth
-              onClick={handleClick}
+              onClick={handleGetCredentials}
               disabled={loading}
             >
               {loading ? 'Loading...' : 'Get Credentials'}
