@@ -9,7 +9,7 @@ export const getCredentials = async (apiUrl) => {
       }
     });
     if (!response.ok) {
-      throw new Error('Network response was no ok ' + response.statusText);
+      throw new Error('Network response was not ok ' + response.statusText);
     }
     const data = await response.json();
     return data;
@@ -36,4 +36,9 @@ export const receiveInvitation = async (apiUrl, invitation) => {
   } catch (error) {
     console.error('There was a problem with the fetch operation:', error);
   }
+};
+
+// Generate QR code data URL
+export const generateQrData = (apiUrl) => {
+  return `${apiUrl}/fetch-credentials`; // Adjust this URL according to your actual endpoint
 };

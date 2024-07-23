@@ -1,7 +1,7 @@
 // src/pages/HolderPage.js
 
 import React, { useState } from 'react';
-import { getCredentials, receiveInvitation } from './api_holder';
+import { getCredentials, receiveInvitation, generateQrData } from './api_holder';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
+import QRCode from 'qrcode.react'; // Import QRCode component
 
 // Style for the TextField with a white border and label color
 const StyledTextField = styled(TextField)(({ theme }) => ({
@@ -37,12 +38,14 @@ const HolderPage = () => {
   const [loading, setLoading] = useState(false);
   const [invitation, setInvitation] = useState('');
   const [apiUrl, setApiUrl] = useState('http://0.0.0.0:11002');
+  const [qrData, setQrData] = useState('');
 
   const handleGetCredentials = async () => {
     setLoading(true);
     const data = await getCredentials(apiUrl);
     setCredentials(data);
     setLoading(false);
+    setQrData(generateQrData(apiUrl)); // Generate QR code data URL when getting credentials
   };
 
   const handleReceiveInvitation = async () => {
@@ -129,6 +132,14 @@ const HolderPage = () => {
               {loading ? 'Processing...' : 'Receive Invitation'}
             </Button>
           </Grid>
+          {qrData && (
+            <Grid item xs={12} style={{ textAlign: 'center', marginTop: '20px' }}>
+              <Typography variant="h6" gutterBottom>
+                Scan the QR Code to Fetch Credentials:
+              </Typography>
+              <QRCode value={qrData} size={256} /> {/* Generate QR code */}
+            </Grid>
+          )}
         </Grid>
       </Box>
     </Container>
