@@ -1,5 +1,3 @@
-// src/pages/HolderPage.js
-
 import React, { useState } from 'react';
 import { getCredentials, receiveInvitation, generateQrData } from './api_holder';
 import Container from '@mui/material/Container';
@@ -15,6 +13,7 @@ import QRCode from 'qrcode.react'; // Import QRCode component
 // Style for the TextField with a white border and label color
 const StyledTextField = styled(TextField)(({ theme }) => ({
   '& .MuiOutlinedInput-root': {
+    color: 'white', // Set text color to white
     '& fieldset': {
       borderColor: 'white', // Set border color to white
     },
@@ -37,7 +36,7 @@ const HolderPage = () => {
   const [credentials, setCredentials] = useState(null);
   const [loading, setLoading] = useState(false);
   const [invitation, setInvitation] = useState('');
-  const [apiUrl, setApiUrl] = useState('http://0.0.0.0:11002');
+  const [apiUrl, setApiUrl] = useState(''); // Remove the default API URL
   const [qrData, setQrData] = useState('');
 
   const handleGetCredentials = async () => {

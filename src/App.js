@@ -4,11 +4,12 @@ import HolderPage from './HolderPage';
 import IssuerPage from './IssuerPage';
 import VerifierPage from './VerifierPage';
 import './App.css';
+import projectImage from './images/project.png'; // Import the image
 
 const App = () => {
   return (
     <Router>
-      <div className="App">
+      <div className="App" style={{ backgroundImage: `url(${projectImage})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '100vh', margin: 0 }}>
         <header className="App-header">
           <nav className="menu">
             <ul className="menu-list">
@@ -16,6 +17,7 @@ const App = () => {
               <li className="menu-item"><Link to="/holder">Holder</Link></li>
               <li className="menu-item"><Link to="/issuer">Issuer</Link></li>
               <li className="menu-item"><Link to="/verifier">Verifier</Link></li>
+              <li className="menu-item"><a href="http://localhost:9000/" target="_blank" rel="noopener noreferrer">Ledger</a></li>
             </ul>
           </nav>
           <Routes>
