@@ -1,121 +1,144 @@
-# Truffle Project with Ganache
+markdown
 
-This project demonstrates how to use [Truffle](https://www.trufflesuite.com/truffle) with [Ganache](https://www.trufflesuite.com/ganache), a personal blockchain for Ethereum development you can use to deploy contracts, develop your applications, and run tests.
+# React and Hyperledger Aries Project
+
+This project demonstrates how to set up and use a React application alongside Hyperledger Aries and ACA-Py (Aries Cloud Agent Python).
 
 ## Prerequisites
 
 Before you begin, ensure you have the following installed on your machine:
 
 - [Node.js](https://nodejs.org/) (v12.x or later)
-- [npm](https://www.npmjs.com/) (v6.x or later)
-- [Truffle](https://www.trufflesuite.com/truffle) (v5.x or later)
-- [Ganache](https://www.trufflesuite.com/ganache) (GUI or CLI)
+- [npm](https://www.npmjs.com/) (v6.x or later) or [Yarn](https://yarnpkg.com/) (v1.x or later)
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
 
 ## Installation
 
-### 1. Install Truffle
-
-If you haven't already installed Truffle, you can do so using npm:
-
-```sh
-npm install -g truffle
-
-2. Install Ganache
-
-You can download the Ganache GUI from here or install the CLI version:
-
-sh
-
-npm install -g ganache-cli
-
-
-3. Clone the Repository
+### 1. Clone the Repository
 
 Clone this repository to your local machine:
 
-sh
-
+```sh
 git clone https://github.com/your-username/your-repo.git
 cd your-repo
 
-4. Install Project Dependencies
+2. Install Project Dependencies
+React
 
-Navigate to the project directory and install the necessary dependencies:
+Navigate to the React project directory and install the necessary dependencies:
+
+Using npm:
 
 sh
 
+cd react-app
 npm install
 
+Or using Yarn:
+
+sh
+
+cd react-app
+yarn install
+
+ACA-Py (Aries Cloud Agent Python)
+
+Navigate to the ACA-Py directory and set up the Docker containers:
+
+sh
+
+cd aca-py
+docker-compose up --build
+
+This will start the ACA-Py containers and necessary services such as PostgreSQL.
 Usage
-1. Start Ganache
+Starting the Development Server
+React
 
-Start Ganache GUI or run Ganache CLI:
+To start the React development server and run the application locally:
 
-sh
-
-ganache-cli
-
-By default, Ganache CLI runs on http://127.0.0.1:8545.
-2. Configure Truffle
-
-Ensure your truffle-config.js file is configured to connect to your local Ganache instance. Here's an example configuration:
-
-javascript
-
-module.exports = {
-  networks: {
-    development: {
-      host: "127.0.0.1",  // Localhost (default: none)
-      port: 8545,         // Standard Ethereum port (default: none)
-      network_id: "*",    // Any network (default: none)
-    },
-  },
-  // Configure your compilers
-  compilers: {
-    solc: {
-      version: "0.8.0",    // Fetch exact version from solc-bin (default: truffle's version)
-    },
-  },
-};
-
-3. Compile Smart Contracts
-
-Compile your smart contracts using Truffle:
+Using npm:
 
 sh
 
-truffle compile
+cd react-app
+npm start
 
-4. Deploy Smart Contracts
-
-Migrate your smart contracts to the Ganache blockchain:
-
-sh
-
-truffle migrate
-
-5. Run Tests
-
-Run the tests to ensure everything is working correctly:
+Or using Yarn:
 
 sh
 
-truffle test
+cd react-app
+yarn start
 
+This will start the app and open it in your default web browser at http://localhost:3000.
+ACA-Py
+
+To start the ACA-Py agent, ensure the Docker containers are running:
+
+sh
+
+cd aca-py
+docker-compose up
+
+This will start the ACA-Py agent on http://localhost:8000.
+Building for Production
+React
+
+To create a production build of the React application:
+
+Using npm:
+
+sh
+
+cd react-app
+npm run build
+
+Or using Yarn:
+
+sh
+
+cd react-app
+yarn build
+
+This will create an optimized build in the react-app/build directory.
+Running Tests
+React
+
+To run the tests for the React application:
+
+Using npm:
+
+sh
+
+cd react-app
+npm test
+
+Or using Yarn:
+
+sh
+
+cd react-app
+yarn test
+
+Using ACA-Py
+
+ACA-Py provides a REST API to interact with the agent. You can access the API documentation at http://localhost:8000/api/doc once the agent is running.
 Project Structure
 
-    contracts/: Directory for Solidity contracts.
-    migrations/: Directory for scriptable deployment files.
-    test/: Directory for test files.
-    truffle-config.js: Truffle configuration file.
+    react-app/: Directory for the React application.
+    aca-py/: Directory for the ACA-Py Docker setup.
+    docker-compose.yml: Docker Compose configuration for ACA-Py and dependencies.
+    README.md: Project documentation.
 
 Troubleshooting
 
 If you encounter any issues, please ensure:
 
-    Ganache is running and accessible.
-    Your Truffle configuration matches your Ganache setup.
-    All dependencies are correctly installed.
+    Node.js, npm/Yarn, Docker, and Docker Compose are correctly installed.
+    All dependencies are installed correctly.
+    The development servers are running without errors.
 
 Contributing
 
@@ -124,8 +147,8 @@ License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-vbnet
+css
 
 
-This `README.md` provides clear instructions on how to set up and use Truffle with Ganache for local Ethereum development, ensuring users can easily follow along. Adjust the GitHub repository URL and project-specific details as necessary.
+This `README.md` provides clear instructions on how to set up and run a React project alongside Hyperledger Aries and ACA-Py, ensuring users can easily follow along. Adjust the GitHub repository URL and project-specific details as necessary.
 
